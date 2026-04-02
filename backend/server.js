@@ -54,8 +54,13 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port: ${PORT}`);
-  console.log('App initialized correctly!');
-});
+// Export the Express API for Vercel
+module.exports = app;
+
+// Start Server locally
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port: ${PORT}`);
+    console.log('App initialized correctly!');
+  });
+}

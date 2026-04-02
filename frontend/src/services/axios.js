@@ -6,7 +6,8 @@ import axios from 'axios';
  * consistently avoiding typing explicit URL prefixes internally through the whole React App interface.
  */
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Point exactly natively configured Node.js server
+  // Use VITE_API_URL environment variable for production (Vercel), fallback to localhost for development
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
   headers: {
     'Content-Type': 'application/json',
   },
